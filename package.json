@@ -10,7 +10,11 @@
     "db:setup": "sequelize db:create && sequelize db:migrate",
     "db:reset": "sequelize db:drop && sequelize db:create && sequelize db:migrate",
     "db:migrate": "sequelize db:migrate",
-    "db:seed": "sequelize db:seed:all"
+    "db:seed": "sequelize db:seed:all",
+    "test": "jest --runInBand --forceExit",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage --runInBand --forceExit",
+    "test:db:setup": "sequelize db:drop --env test && sequelize db:create --env test && sequelize db:migrate --env test"
   },
   "author": "Jalu Satriani Wijaya <jalusatrianiwijaya1@gmail.com>",
   "license": "ISC",
@@ -25,9 +29,11 @@
     "http-errors": "^2.0.0",
     "morgan": "^1.10.0",
     "pg": "^8.13.0",
-    "sequelize": "^6.37.3"
+    "sequelize": "^6.37.3",
+    "supertest": "^7.0.0"
   },
   "devDependencies": {
+    "jest": "^29.7.0",
     "sequelize-cli": "^6.6.2"
   }
 }
