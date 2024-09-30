@@ -4,7 +4,10 @@
   "description": "Individual Project RMT-53 Server Side",
   "main": "index.js",
   "private": true,
-  "scripts": {},
+  "scripts": {
+    "start": "node index.js",
+    "serve": "node --watch index.js"
+  },
   "author": "Jalu Satriani Wijaya <jalusatrianiwijaya1@gmail.com>",
   "license": "ISC",
   "dependencies": {
