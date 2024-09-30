@@ -21,6 +21,8 @@ app.use(
   })
 );
 
+app.use("/auth", require("./routes/auth"));
+
 app.use((req, res, next) => {
   throw createError(404, "Not Found");
 });
