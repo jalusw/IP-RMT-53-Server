@@ -5,6 +5,9 @@ const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
 
+const createError = require("http-errors");
+const errorHandler = require("error-handler-json");
+
 const app = express();
 
 app.use(cors());
@@ -17,5 +20,10 @@ app.use(
     }),
   })
 );
+
+app.use((req, res, next) => {
+  throw createError(404, "Not Found");
+});
+app.use(errorHandler());
 
 module.exports = app;
