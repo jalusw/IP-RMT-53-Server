@@ -15,11 +15,18 @@ class AuthController {
         email: req.body.email,
         password: HashHelper.bcrypt(req.body.password),
       });
+
       return res.status(201).json({
-        status: 200,
+        status: 201,
         success: true,
         message: "User created",
-        user,
+        data: {
+          user: {
+            username: user.username,
+            email: user.email,
+            avatar: user.avatar,
+          },
+        },
       });
     } catch (error) {
       if (
