@@ -1,0 +1,10 @@
+{
+  "name": "ip-rmt-53-server",
+  "version": "1.0.0",
+  "description": "Individual Project RMT-53 Server Side",
+  "main": "index.js",
+  "private": true,
+  "scripts": {},
+  "author": "Jalu Satriani Wijaya <jalusatrianiwijaya1@gmail.com>",
+  "license": "ISC"
+}
