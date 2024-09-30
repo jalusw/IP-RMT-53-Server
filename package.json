@@ -6,5 +6,9 @@
   "private": true,
   "scripts": {},
   "author": "Jalu Satriani Wijaya <jalusatrianiwijaya1@gmail.com>",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.21.0"
+  }
 }
