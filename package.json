@@ -6,7 +6,11 @@
   "private": true,
   "scripts": {
     "start": "node index.js",
-    "serve": "node --watch index.js"
+    "serve": "node --watch index.js",
+    "db:setup": "sequelize db:create && sequelize db:migrate",
+    "db:reset": "sequelize db:drop && sequelize db:create && sequelize db:migrate",
+    "db:migrate": "sequelize db:migrate",
+    "db:seed": "sequelize db:seed:all"
   },
   "author": "Jalu Satriani Wijaya <jalusatrianiwijaya1@gmail.com>",
   "license": "ISC",
