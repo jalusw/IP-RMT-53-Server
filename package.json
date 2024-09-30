@@ -1,0 +1,22 @@
+{
+  "name": "ip-rmt-53-server",
+  "version": "1.0.0",
+  "description": "Individual Project RMT-53 Server Side",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "start": "node index.js",
+    "serve": "node --watch index.js"
+  },
+  "author": "Jalu Satriani Wijaya <jalusatrianiwijaya1@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "error-handler-json": "^2.1.0",
+    "errorhandler": "^1.5.1",
+    "express": "^4.21.0",
+    "http-errors": "^2.0.0",
+    "morgan": "^1.10.0"
+  }
+}
