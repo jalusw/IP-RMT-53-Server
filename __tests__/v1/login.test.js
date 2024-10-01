@@ -61,7 +61,7 @@ describe("Feature - Login v1", () => {
   });
 
   it("Should not authenticate a user with missing credentials", async () => {
-    const response = await request.post("/auth/login").send({
+    const response = await request.post("/v1/auth/login").send({
       email: "",
       password: "",
     });
