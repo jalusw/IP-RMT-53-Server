@@ -68,6 +68,9 @@ describe("Feature - Register v1", () => {
       email: "test@mail.com",
       password: "",
     });
+
+    expect(response.status).toBe(400);
+    expect(response.body).toHaveProperty("message", "Bad Request");
   });
 
   it("Should not register a user with an invalid username", async () => {
@@ -76,5 +79,8 @@ describe("Feature - Register v1", () => {
       email: "test@mail.com",
       password: "password",
     });
+
+    expect(response.status).toBe(400);
+    expect(response.body).toHaveProperty("message", "Bad Request");
   });
 });
