@@ -8,7 +8,7 @@ class AuthController {
   static async login(req, res, next) {
     try {
       const user = await AuthHelper.login(req.body);
-      const token = await AuthHelper.generateAccessToken(user.id);
+      const token = AuthHelper.generateAccessToken(user);
 
       return res.status(200).json({
         message: "Login success",
