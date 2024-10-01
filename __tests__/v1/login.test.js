@@ -1,8 +1,8 @@
 const supertest = require("supertest");
-const request = supertest(require("../app"));
+const request = supertest(require("../../app"));
 
-const db = require("../database/models");
-const HashHelper = require("../helpers/HashHelper");
+const db = require("../../database/models");
+const HashHelper = require("../../helpers/HashHelper");
 
 const mockUser = {
   username: "test",
@@ -10,7 +10,7 @@ const mockUser = {
   password: "password",
 };
 
-describe("Feature - Login", () => {
+describe("Feature - Login v1", () => {
   beforeAll(async () => {
     await db.User.create({
       username: mockUser.username,
@@ -29,7 +29,7 @@ describe("Feature - Login", () => {
   });
 
   it("Should authenticate with valid credentials", async () => {
-    const response = await request.post("/auth/login").send({
+    const response = await request.post("/v1/auth/login").send({
       email: mockUser.email,
       password: mockUser.password,
     });
@@ -41,7 +41,7 @@ describe("Feature - Login", () => {
   });
 
   it("Should not authenticate wrong password", async () => {
-    const response = await request.post("/auth/login").send({
+    const response = await request.post("/v1/auth/login").send({
       email: "test@mail.com",
       password: "12345678",
     });
@@ -51,7 +51,7 @@ describe("Feature - Login", () => {
   });
 
   it("Should not authenticate wrong email", async () => {
-    const response = await request.post("/auth/login").send({
+    const response = await request.post("/v1/auth/login").send({
       email: "tes@mail.com",
       password: "password",
     });
@@ -61,7 +61,7 @@ describe("Feature - Login", () => {
   });
 
   it("Should not authenticate a user with missing credentials", async () => {
-    const response = await request.post("/auth/login").send({
+    const response = await request.post("/v1/auth/login").send({
       email: "",
       password: "",
     });

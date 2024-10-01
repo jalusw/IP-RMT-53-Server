@@ -1,9 +1,9 @@
 const supertest = require("supertest");
-const request = supertest(require("../app"));
+const request = supertest(require("../../app"));
 
-const db = require("../database/models");
+const db = require("../../database/models");
 
-describe("Feature - Register", () => {
+describe("Feature - Register v1", () => {
   afterAll(async () => {
     await db.User.destroy({
       truncate: true,
@@ -14,7 +14,7 @@ describe("Feature - Register", () => {
   });
 
   it("Should register a user", async () => {
-    const response = await request.post("/auth/register").send({
+    const response = await request.post("/v1/auth/register").send({
       username: "test",
       email: "test@mail.com",
       password: "password",
@@ -25,7 +25,7 @@ describe("Feature - Register", () => {
   });
 
   it("Should not register a registered user", async () => {
-    const response = await request.post("/auth/register").send({
+    const response = await request.post("/v1/auth/register").send({
       username: "test",
       email: "test@mail.com",
       password: "password",
@@ -41,7 +41,7 @@ describe("Feature - Register", () => {
   });
 
   it("Should not register a user with an existing email", async () => {
-    const response = await request.post("/auth/register").send({
+    const response = await request.post("/v1/auth/register").send({
       username: "test",
       email: "test@mail.com",
       password: "password",
@@ -52,7 +52,7 @@ describe("Feature - Register", () => {
   });
 
   it("Should not register a user with an invalid email", async () => {
-    const response = await request.post("/auth/register").send({
+    const response = await request.post("/v1/auth/register").send({
       username: "test",
       email: "testmail.com",
       password: "password",
@@ -63,18 +63,24 @@ describe("Feature - Register", () => {
   });
 
   it("Should not register a user with an invalid password", async () => {
-    const response = await request.post("/auth/register").send({
+    const response = await request.post("/v1/auth/register").send({
       username: "test",
       email: "test@mail.com",
       password: "",
     });
+
+    expect(response.status).toBe(400);
+    expect(response.body).toHaveProperty("message", "Bad Request");
   });
 
   it("Should not register a user with an invalid username", async () => {
-    const response = await request.post("/auth/register").send({
+    const response = await request.post("/v1/auth/register").send({
       username: "",
       email: "test@mail.com",
       password: "password",
     });
+
+    expect(response.status).toBe(400);
+    expect(response.body).toHaveProperty("message", "Bad Request");
   });
 });

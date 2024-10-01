@@ -2,7 +2,7 @@ const { validationResult } = require("express-validator");
 const createHttpError = require("http-errors");
 
 class ValidationMiddleware {
-  static async checkValidation(req, _res, next) {
+  static async handle(req, _res, next) {
     const errors = validationResult(req);
     if (errors.isEmpty()) {
       return next();

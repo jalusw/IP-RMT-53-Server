@@ -13,5 +13,5 @@ module.exports = [
     .withMessage("Email should not be empty")
     .trim(),
   body("password").notEmpty().withMessage("Password should not be empty"),
-  ValidationMiddleware.checkValidation,
+  ValidationMiddleware.handle,
 ];

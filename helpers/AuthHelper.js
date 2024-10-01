@@ -25,12 +25,16 @@ class AuthHelper {
     return user;
   }
 
-  static async generateAccessToken(user) {
+  static generateAccessToken(user) {
     const payload = {
       id: user.id,
       email: user.email,
     };
     return jwt.sign(payload, config.jwtSecret);
+  }
+
+  static verifyAccessToken(token) {
+    return jwt.verify(token, config.jwtSecret);
   }
 }
 
