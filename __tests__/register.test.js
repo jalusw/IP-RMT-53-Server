@@ -24,6 +24,22 @@ describe("Feature - Register", () => {
     expect(response.body.message).toBe("User created");
   });
 
+  it("Should not register a registered user", async () => {
+    const response = await request.post("/auth/register").send({
+      username: "test",
+      email: "test@mail.com",
+      password: "password",
+    });
+
+    expect(response.status).toBe(400);
+    expect(response.body).toHaveProperty("message", "Bad Request");
+    expect(response.body.errors[0]).toHaveProperty("field", "username");
+    expect(response.body.errors[0]).toHaveProperty(
+      "message",
+      "Username already exists"
+    );
+  });
+
   it("Should not register a user with an existing email", async () => {
     const response = await request.post("/auth/register").send({
       username: "test",
