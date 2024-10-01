@@ -17,8 +17,6 @@ class AuthController {
       });
 
       return res.status(201).json({
-        status: 201,
-        success: true,
         message: "User created",
         data: {
           user: {
