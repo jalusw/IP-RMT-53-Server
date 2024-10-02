@@ -1,6 +1,9 @@
 const NoteController = require("../../controllers/NoteController");
+const AuthenticationMiddleware = require("../../middlewares/AuthenticationMiddleware");
 
 const router = require("express").Router();
+
+router.use("/", AuthenticationMiddleware.handle);
 
 router.get("/", NoteController.index);
 router.post("/", NoteController.create);
