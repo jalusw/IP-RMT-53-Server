@@ -59,8 +59,7 @@ class NoteController {
         error.name === "SequelizeValidationError" ||
         error.name === "SequelizeUniqueConstraintError"
       ) {
-        return res.status(400).json({
-          message: "Bad Request",
+        error = createHttpError(400, "Bad Request", {
           errors: error.errors.map((err) => ({
             field: err.path,
             message: err.message,
@@ -100,8 +99,7 @@ class NoteController {
         error.name === "SequelizeValidationError" ||
         error.name === "SequelizeUniqueConstraintError"
       ) {
-        return res.status(400).json({
-          message: "Bad Request",
+        error = createHttpError(400, "Bad Request", {
           errors: error.errors.map((err) => ({
             field: err.path,
             message: err.message,
