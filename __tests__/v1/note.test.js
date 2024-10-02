@@ -79,6 +79,11 @@ describe("Feature - Note v1", () => {
   });
 
   describe("Read Note", () => {
+    it("Should require authentication", async () => {
+      const response = await request.get("/v1/notes");
+      expect(response.status).toBe(401);
+      expect(response.body.message).toBe("access token is required");
+    });
     it("Should return notes that are belong to user", async () => {
       const response = await request
         .get("/v1/notes")
