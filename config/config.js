@@ -5,6 +5,10 @@ const config = {
   host: process.env.APP_HOST || "localhost",
   port: process.env.PORT || 3000,
   jwtSecret: process.env.JWT_SECRET || "secret",
+
+  cloudinaryName: process.env.CLOUDINARY_NAME,
+  cloudinaryApiKey: process.env.CLOUDINARY_API_KEY,
+  cloudinaryApiSecret: process.env.CLOUDINARY_API_SECRET,
 };
 
 module.exports = config;

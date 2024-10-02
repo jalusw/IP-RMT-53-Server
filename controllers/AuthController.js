@@ -3,6 +3,7 @@ const HashHelper = require("../helpers/HashHelper");
 
 const { User } = require("../database/models");
 const AuthHelper = require("../helpers/AuthHelper");
+const CloudinaryService = require("../services/CloudinaryService");
 
 class AuthController {
   static async login(req, res, next) {
@@ -31,7 +32,7 @@ class AuthController {
       const user = await User.create({
         avatar:
           req.body?.avatar ||
-          `https://ui-avatars.com/api/?name={${req.body.username}}`,
+          `https://ui-avatars.com/api/?name=${req.body.username}`,
         username: req.body.username,
         email: req.body.email,
         password: HashHelper.bcrypt(req.body.password),
@@ -90,13 +91,20 @@ class AuthController {
         throw createHttpError(404, "User not found");
       }
 
+      let avatar = null;
+
+      if (req.file) {
+        const upload = await CloudinaryService.uploadImage(req.file);
+        avatar = upload.secure_url;
+      }
+
       await user.update({
         username: req.body.username || user.username,
         avatar:
-          req.body.avatar ||
+          avatar ||
+          user.avatar ||
           (req.body.username != user.username &&
-            `https://ui-avatars.com/api/?name=${req.body.username}`) ||
-          user.avatar,
+            `https://ui-avatars.com/api/?name=${req.body.username}`),
       });
 
       return res.status(200).json({
