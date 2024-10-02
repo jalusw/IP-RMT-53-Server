@@ -9,6 +9,8 @@ const config = {
   cloudinaryName: process.env.CLOUDINARY_NAME,
   cloudinaryApiKey: process.env.CLOUDINARY_API_KEY,
   cloudinaryApiSecret: process.env.CLOUDINARY_API_SECRET,
+
+  googleClientId: process.env.GOOGLE_CLIENT_ID,
 };
 
 module.exports = config;

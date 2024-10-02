@@ -10,6 +10,8 @@ const AuthenticationMiddleware = require("../../middlewares/AuthenticationMiddle
 
 router.post("/login", require("../../requests/login"), AuthController.login);
 
+router.post("/google", AuthController.google);
+
 router.post(
   "/register",
   require("../../requests/register"),

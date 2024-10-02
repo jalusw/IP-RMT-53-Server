@@ -132,6 +132,28 @@ class AuthController {
       return next(error);
     }
   }
+
+  static async google(req, res, next) {
+    try {
+      const user = await AuthHelper.google(req.body.credentials);
+
+      const token = AuthHelper.generateAccessToken(user);
+
+      return res.status(200).json({
+        message: "Login success",
+        data: {
+          access_token: token,
+          user: {
+            username: user.username,
+            email: user.email,
+            avatar: user.avatar,
+          },
+        },
+      });
+    } catch (error) {
+      return next(error);
+    }
+  }
 }
 
 module.exports = AuthController;

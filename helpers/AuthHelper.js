@@ -2,6 +2,7 @@ const jwt = require("jsonwebtoken");
 const config = require("../config/config");
 const { User } = require("../database/models");
 const HashHelper = require("./HashHelper");
+const { OAuth2Client } = require("google-auth-library");
 const createHttpError = require("http-errors");
 
 class AuthHelper {
@@ -23,6 +24,35 @@ class AuthHelper {
     }
 
     return user;
+  }
+
+  static async google(credentials) {
+    const client = new OAuth2Client();
+
+    const ticket = await client.verifyIdToken({
+      idToken: credentials.credential,
+      audience: config.googleClientId,
+    });
+
+    const payload = ticket.getPayload();
+
+    const findUserWithUsername = await User.count({
+      where: { username: payload.name },
+    });
+
+    let [user, created] = await User.findOrCreate({
+      where: { email: payload.email },
+      defaults: {
+        email: payload.email,
+        username: findUserWithUsername
+          ? payload.name + Math.floor(Math.random() * 100)
+          : payload.name,
+        avatar: payload.picture,
+        password: HashHelper.bcrypt(payload.sub),
+      },
+    });
+
+    return user || created;
   }
 
   static generateAccessToken(user) {

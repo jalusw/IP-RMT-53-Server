@@ -27,6 +27,7 @@
     "errorhandler": "^1.5.1",
     "express": "^4.21.0",
     "express-validator": "^7.2.0",
+    "google-auth-library": "^9.14.1",
     "http-errors": "^2.0.0",
     "jsonwebtoken": "^9.0.2",
     "morgan": "^1.10.0",
