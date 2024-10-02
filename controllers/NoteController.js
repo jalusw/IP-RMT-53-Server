@@ -46,7 +46,7 @@ class NoteController {
     try {
       const note = await req.user.createNote({
         title: req.body.title,
-        content: req.body.content,
+        content: req.body.content ?? "",
       });
       return res.status(201).json({
         message: "Note created",

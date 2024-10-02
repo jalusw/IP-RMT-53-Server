@@ -37,13 +37,9 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
-          notEmpty: {
-            args: true,
-            msg: "Content cannot be empty",
-          },
           notNull: {
             args: true,
-            msg: "Content cannot be empty",
+            msg: "Content cannot be null",
           },
         },
       },
@@ -57,6 +53,17 @@ module.exports = (sequelize, DataTypes) => {
       modelName: "Note",
       paranoid: true,
       hooks: {
+        beforeValidate: async (note) => {
+          const findNote = await Note.count({
+            where: {
+              title: note.title,
+              UserId: note.UserId,
+            },
+          });
+          if (findNote > 0) {
+            note.title = `${note.title} ${new Date().getTime()}`;
+          }
+        },
         beforeCreate: (note) => {
           note.slug = note.title.toLowerCase().split(" ").join("-");
         },
