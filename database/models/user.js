@@ -53,6 +53,10 @@ module.exports = (sequelize, DataTypes) => {
             msg: "Email cannot be empty",
           },
         },
+        unique: {
+          args: true,
+          msg: "Email already exists",
+        },
       },
       password: {
         type: DataTypes.STRING,
