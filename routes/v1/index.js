@@ -3,6 +3,7 @@ const AuthenticationMiddleware = require("../../middlewares/AuthenticationMiddle
 const router = require("express").Router();
 
 router.use("/auth", require("./auth"));
-router.use("/notes", AuthenticationMiddleware.handle, require("./notes"));
+router.use("/notes", require("./notes"));
+router.use("/users", require("./users"));
 
 module.exports = router;
