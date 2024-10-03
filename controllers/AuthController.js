@@ -135,7 +135,7 @@ class AuthController {
 
   static async google(req, res, next) {
     try {
-      const user = await AuthHelper.google(req.body.credentials);
+      const [user] = await AuthHelper.google(req.body);
 
       const token = AuthHelper.generateAccessToken(user);
 
