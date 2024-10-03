@@ -1,9 +1,16 @@
 const createHttpError = require("http-errors");
 const { Note } = require("../database/models");
+
 class NoteController {
   static async index(req, res, next) {
     try {
-      const notes = await req.user.getNotes();
+      const notes = await Note.findAll({
+        attributes: ["id", "title", "status"],
+        where: {
+          UserId: req.user.id,
+        },
+      });
+
       return res.json({
         message: "success",
         data: {
