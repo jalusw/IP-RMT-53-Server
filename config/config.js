@@ -10,6 +10,7 @@ const config = {
   cloudinaryApiKey: process.env.CLOUDINARY_API_KEY,
   cloudinaryApiSecret: process.env.CLOUDINARY_API_SECRET,
 
+  googleAIStudioApiKey: process.env.GOOGLE_AI_STUDIO_API_KEY,
   googleClientId: process.env.GOOGLE_CLIENT_ID,
 };
 

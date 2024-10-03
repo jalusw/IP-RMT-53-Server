@@ -19,6 +19,7 @@
   "author": "Jalu Satriani Wijaya <jalusatrianiwijaya1@gmail.com>",
   "license": "ISC",
   "dependencies": {
+    "@google/generative-ai": "^0.20.0",
     "bcrypt": "^5.1.1",
     "cloudinary": "^2.5.0",
     "cors": "^2.8.5",
