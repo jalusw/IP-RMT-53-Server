@@ -79,6 +79,11 @@ describe("Feature - Note v1", () => {
   });
 
   describe("Read Note", () => {
+    it("Should require authentication", async () => {
+      const response = await request.get("/v1/notes");
+      expect(response.status).toBe(401);
+      expect(response.body.message).toBe("access token is required");
+    });
     it("Should return notes that are belong to user", async () => {
       const response = await request
         .get("/v1/notes")
@@ -113,6 +118,16 @@ describe("Feature - Note v1", () => {
       expect(response.body.data.note.content).toBe("# Content 5");
     });
 
+    it("Should handle a duplicate title", async () => {
+      const response = await request
+        .post("/v1/notes")
+        .set("Authorization", `Bearer ${mockUsers[0].token}`)
+        .send({ title: "Note 5", content: "# Content 5" });
+
+      expect(response.status).toBe(201);
+      expect(response.body.message).toBe("Note created");
+    });
+
     it("Should not create a note without title", async () => {
       const response = await request
         .post("/v1/notes")
@@ -124,17 +139,7 @@ describe("Feature - Note v1", () => {
       expect(response.status).toBe(400);
       expect(response.body.message).toBe("Bad Request");
     });
-    it("Should not create a note without content", async () => {
-      const response = await request
-        .post("/v1/notes")
-        .set("Authorization", `Bearer ${mockUsers[0].token}`)
-        .send({
-          title: "Note 6",
-        });
 
-      expect(response.status).toBe(400);
-      expect(response.body.message).toBe("Bad Request");
-    });
     it("Should not create a note without user", async () => {
       const response = await request.post("/v1/notes").send({
         title: "Note 7",
@@ -180,18 +185,6 @@ describe("Feature - Note v1", () => {
         .send({
           title: "",
           content: "# Content 1 Updated",
-        });
-
-      expect(response.status).toBe(400);
-      expect(response.body.message).toBe("Bad Request");
-    });
-    it("Should not update a note without content", async () => {
-      const response = await request
-        .put("/v1/notes/1")
-        .set("Authorization", `Bearer ${mockUsers[0].token}`)
-        .send({
-          title: "Note 1 Updated",
-          content: "",
         });
 
       expect(response.status).toBe(400);

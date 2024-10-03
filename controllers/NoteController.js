@@ -1,9 +1,16 @@
 const createHttpError = require("http-errors");
 const { Note } = require("../database/models");
+
 class NoteController {
   static async index(req, res, next) {
     try {
-      const notes = await req.user.getNotes();
+      const notes = await Note.findAll({
+        attributes: ["id", "title", "status"],
+        where: {
+          UserId: req.user.id,
+        },
+      });
+
       return res.json({
         message: "success",
         data: {
@@ -46,7 +53,7 @@ class NoteController {
     try {
       const note = await req.user.createNote({
         title: req.body.title,
-        content: req.body.content,
+        content: req.body.content ?? "",
       });
       return res.status(201).json({
         message: "Note created",
@@ -59,8 +66,7 @@ class NoteController {
         error.name === "SequelizeValidationError" ||
         error.name === "SequelizeUniqueConstraintError"
       ) {
-        return res.status(400).json({
-          message: "Bad Request",
+        error = createHttpError(400, "Bad Request", {
           errors: error.errors.map((err) => ({
             field: err.path,
             message: err.message,
@@ -100,8 +106,7 @@ class NoteController {
         error.name === "SequelizeValidationError" ||
         error.name === "SequelizeUniqueConstraintError"
       ) {
-        return res.status(400).json({
-          message: "Bad Request",
+        error = createHttpError(400, "Bad Request", {
           errors: error.errors.map((err) => ({
             field: err.path,
             message: err.message,
