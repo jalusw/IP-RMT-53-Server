@@ -27,14 +27,10 @@ module.exports = (sequelize, DataTypes) => {
             msg: "Title cannot be empty",
           },
         },
-        unique: {
-          args: true,
-          msg: "Title already exists",
-        },
       },
       slug: DataTypes.STRING,
       content: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
         allowNull: false,
         validate: {
           notNull: {

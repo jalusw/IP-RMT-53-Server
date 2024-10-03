@@ -11,13 +11,12 @@ module.exports = {
       },
       title: {
         type: Sequelize.STRING,
-        unique: true,
       },
       slug: {
         type: Sequelize.STRING,
       },
       content: {
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT,
       },
       status: {
         type: Sequelize.ENUM("public", "private", "archived"),
