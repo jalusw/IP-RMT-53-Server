@@ -18,10 +18,6 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
-          len: {
-            args: [4, 20],
-            msg: "Username must be between 4 and 20 characters",
-          },
           notEmpty: {
             args: true,
             msg: "Username cannot be empty",
