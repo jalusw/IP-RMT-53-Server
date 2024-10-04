@@ -22,7 +22,9 @@ Current version of the API is `v1`. All the endpoints are prefixed with `/v1`.
 - PUT `/v1/notes/:id`
 - DELETE `/v1/notes/:id`
 
-
+**AI Assistant** :
+- POST `/v1/assistant/enhance`
+- POST `/v1/assistant/summarize`
 
 ---
 
@@ -457,13 +459,75 @@ Response - 200 OK
 
 ---
 
+### POST /v1/assistant/enhance
+
+Enhance the text.
+
+#### Request
+
+Headers
+```
+Authorization: Bearer <access_token>
+```
+
+Body
+```json
+{
+  "content": "string"
+}
+```
+
+#### Response
+
+Response - 200 OK
+```json
+{
+    "message": "success",
+    "data": {
+        "result": "string"
+    }
+}
+```
+
+### POST /v1/assistant/summarize
+
+Summarize the text.
+
+#### Request
+
+Headers
+```
+Authorization: Bearer <access_token>
+```
+
+Body
+```json
+{
+  "content": "string"
+}
+```
+
+#### Response
+
+Response - 200 OK
+```json
+{
+    "message": "success",
+    "data": {
+        "result": "string"
+    }
+}
+```
+
+---
+
 ## Global Error Response
 
 **Global Error Response** :
-- 400 Bad Request
-- 401 Unauthorized
-- 404 Not Found
-- 500 Internal Server Error
+- `400` Bad Request
+- `401` Unauthorized
+- `404` Not Found
+- `500` Internal Server Error
 
 Response - 400 Bad Request
 ```json
