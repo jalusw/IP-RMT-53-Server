@@ -6,8 +6,6 @@ Current version of the API is `v1`. All the endpoints are prefixed with `/v1`.
 
 ## End Points
 
-These are available endpoints for the FlowMD API.
-
 **Authentication** : 
 - POST `/v1/auth/login`
 - POST `/v1/auth/register`
@@ -16,6 +14,15 @@ These are available endpoints for the FlowMD API.
 **Authenticated User** :
 - GET `/v1/auth/profile`
 - PUT `/v1/auth/profile`
+
+**Notes** :
+- GET `/v1/notes`
+- POST `/v1/notes`
+- GET `/v1/notes/:id`
+- PUT `/v1/notes/:id`
+- DELETE `/v1/notes/:id`
+
+
 
 ---
 
@@ -244,7 +251,219 @@ Response - 400 Bad Request
 
 ---
 
+### GET /v1/notes
+
+Get all notes.
+
+#### Request
+
+Header
+```
+Authorization: Bearer <access_token>
+```
+
+#### Response
+
+Response - 200 OK
+```json
+{
+    "message": "success",
+    "data": {
+        "notes": [
+            {
+                "id": "string",
+                "title": "string",
+                "status": "string",
+            }
+        ]
+    }
+}
+```
+
+### POST /v1/notes
+
+Create a new note.
+
+#### Request
+
+Header
+```
+Authorization: Bearer <access_token>
+```
+
+Body
+```json
+{
+  "title": "string",
+  "content": "string",
+  "status": "string"
+}
+```
+
+#### Response
+
+Response - 201 Created
+```json
+{
+    "message": "success", 
+    "data": {
+        "note": {
+            "id": "string",
+            "title": "string",
+            "content": "string",
+            "UserId": "integer",
+            "status": "string",
+            "createdAt": "string",
+            "updatedAt": "string",
+            "slug": "string",
+            "status": "string",
+            "deletedAt": "string"
+        }
+    }
+}
+```
+
+Response - 400 Bad Request
+```json
+{
+    "status": 400,
+    "message": "Bad Request",
+    "name": "BadRequestError",
+    "errors": [
+        {
+            "field": "title",
+            "message": "Title should not be empty"
+        },
+        {
+            "field": "content",
+            "message": "Content should not be empty"
+        }
+    ]
+}
+```
+
+
+### GET /v1/notes/:id
+
+Get a note by id.
+
+#### Request
+
+Header
+```
+Authorization: Bearer <access_token>
+```
+
+#### Response
+
+Response - 200 OK
+```json
+{
+    "message": "success",
+    "data": {
+        "note": {
+            "id": "string",
+            "title": "string",
+            "content": "string",
+            "UserId": "integer",
+            "status": "string",
+            "createdAt": "string",
+            "updatedAt": "string",
+            "slug": "string",
+            "status": "string",
+            "deletedAt": "string"
+        }
+    }
+}
+```
+
+
+### PUT /v1/notes/:id
+
+Update a note by id.
+
+#### Request
+
+Header
+```
+Authorization: Bearer <access_token>
+```
+
+Body
+```json
+{
+  "title": "string",
+  "content": "string",
+}
+```
+
+#### Response
+
+Response - 200 OK
+```json
+{
+    "message": "success",
+    "data": {
+        "note": {
+            "id": "string",
+            "title": "string",
+            "content": "string",
+            "UserId": "integer",
+            "status": "string",
+            "createdAt": "string",
+            "updatedAt": "string",
+            "slug": "string",
+            "status": "string",
+            "deletedAt": "string"
+        }
+    }
+}
+```
+
+
+### DELETE /v1/notes/:id
+
+Delete a note by id.
+
+#### Request
+
+Header
+```
+Authorization: Bearer <access_token>
+```
+
+#### Response
+
+Response - 200 OK
+```json
+{
+    "message": "success",
+    "data": {
+        "note": {
+            "id": "string",
+            "title": "string",
+            "content": "string",
+            "UserId": "integer",
+            "status": "string",
+            "createdAt": "string",
+            "updatedAt": "string",
+            "slug": "string",
+            "status": "string",
+            "deletedAt": "string"
+        }
+    }
+}
+```
+
+---
+
 ## Global Error Response
+
+**Global Error Response** :
+- 400 Bad Request
+- 401 Unauthorized
+- 404 Not Found
+- 500 Internal Server Error
 
 Response - 400 Bad Request
 ```json
