@@ -7,7 +7,6 @@ const router = require("express").Router();
 
 router.use("/auth", require("./auth"));
 router.use("/notes", require("./notes"));
-router.use("/users", require("./users"));
 
 router.post("/assistant/enhance", async (req, res, next) => {
   try {
@@ -68,8 +67,6 @@ router.post("/services/drive", async (req, res, next) => {
       },
     });
 
-    console.log(result);
-
     return res.json({
       message: "success",
       data: {
@@ -77,7 +74,6 @@ router.post("/services/drive", async (req, res, next) => {
       },
     });
   } catch (error) {
-    console.error(error);
     next(error);
   }
 });
