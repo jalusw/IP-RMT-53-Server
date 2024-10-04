@@ -3,7 +3,7 @@ require("dotenv").config();
 const config = {
   env: process.env.NODE_ENV || "development",
   host: process.env.APP_HOST || "localhost",
-  port: process.env.PORT || 3000,
+  port: process.env.APP_PORT || 3000,
   jwtSecret: process.env.JWT_SECRET || "secret",
 
   cloudinaryName: process.env.CLOUDINARY_NAME,
