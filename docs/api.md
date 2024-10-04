@@ -26,6 +26,9 @@ Current version of the API is `v1`. All the endpoints are prefixed with `/v1`.
 - POST `/v1/assistant/enhance`
 - POST `/v1/assistant/summarize`
 
+**Service Proxy** :
+- POST `/v1/services/drive`
+
 ---
 
 ### GET /v1/auth/login
@@ -515,6 +518,41 @@ Response - 200 OK
     "message": "success",
     "data": {
         "result": "string"
+    }
+}
+```
+
+---
+
+
+### POST /v1/services/drive
+
+Proxy request to Google Drive API.
+
+#### Request
+
+Headers
+```
+Authorization: Bearer <access_token>
+```
+
+Body
+```json
+{
+    access_token: "string",
+    content: "string",
+    title: "string"
+}
+```
+
+#### Response
+
+Response - 200 OK
+```json
+{
+    "message": "success",
+    "data": {
+        id: integer,
     }
 }
 ```
